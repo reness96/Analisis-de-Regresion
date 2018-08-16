@@ -1,0 +1,62 @@
+##René Benjamin Shalita Sánchez
+
+####1
+
+vector1<-11:30
+Matriz<-matrix(vector1)
+dim(Matriz)<-c(4,5)
+
+colnames(Matriz, do.NULL = TRUE, prefix = "col")
+colnames(Matriz)<-c("escuela1","escuela2","escuela3","escuela4","escuela5")
+
+rownames(Matriz, do.NULL = TRUE, prefix = "row")
+rownames(Matriz)<-c("toluca","pachuca","gdl","mty")
+
+show(Matriz)
+
+Matriz["toluca","escuela3"]
+Matriz["gdl","escuela5"]
+Matriz["pachuca","escuela1"]
+
+###2
+x<-1:18
+Matriz2<-matrix(x,6,3)
+Matriz2[3,3]
+
+###3  
+S<-matrix(1:9,nrow=3)
+S[,2]*S[,1]
+
+
+###4
+a<-c("pequeño","largo","enorme")
+b<-a!="largo"
+a[b]
+
+###5
+facultad<-c("Economía","Derecho","Medicina","Ingeniería")
+licenciatura<-c("Actuaría","Derecho","Enfermería","Ingeniería industrial")
+calificación<-c(8,7,9,10)
+
+UAEM<-data.frame(licenciatura,calificación)
+rownames(UAEM)=facultad
+
+class(UAEM$licenciatura)
+class(UAEM$calificación)
+
+UAEM2<-subset(UAEM,select=-calificación)
+
+pie(UAEM$calificación,labels=UAEM$licenciatura,main="Calificaciones")
+
+###6
+Nombre<-c("Carlos","Juan","Raquel","Paty")
+Edad<-c(32,35,43,25)
+Ecivil<-c("Casado","Soltero","soltero","Unión Libre")
+SS<-c("IMSS","IMSS","ISSSTE","PRIVADO")
+Ocupación<-c("Contador","Carpintero","Profesora","Diseñador")
+BaseDatos<-data.frame(Nombre,Edad,Ecivil,SS,Ocupación)
+
+Ocupación[c(2,4)]
+SS[c(3,1)]
+Ecivil[c(4,2)]
+sum(Edad)
