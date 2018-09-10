@@ -1,0 +1,46 @@
+#1)
+temp<-c(170, 172,173,174,174,175,176,177,180,180,180,180,180,181,181,182,182,182,182,184,184,185,186,188)
+rela<-c(.84,1.31,1.42,1.03,1.07,1.08,1.04,1.80,1.45,1.60,1.61,2.13,2.15,.84,1.43,.90,1.81,1.94,2.68,1.49,2.52,3,1.87,3.08)
+acero<-data.frame(temp,rela)
+boxplot(acero, xlab="temperatura", ylab="relación")
+require(ggplot2)
+ggplot(data=acero,aes(x=temp,y=rela))+geom_boxplot()
+#No explica por completo y de forma única que la temperatura ya que la correlación es de 0.67,
+#que aunque es alta existen errores.
+ggplot(data=acero,aes(x=temp,y=rela))+geom_point()
+#No, ya que se prefiere una correlación de mayor o igual a 0.7 para que 
+#ya que indicaría una tendencia que podría estimar el valor de la temperatura.
+#------------------------------------------------------------------------------------------------------------------------------------------------
+#2)
+motor<-c(1:10)
+edad<-c(0,0,2,11,7,16,9,0,12,4)
+linea<-c(1.72,4.38,4.06,1.26,5.31,.57,3.37,3.44,.74,1.24)
+refo<-c(1.88,5.93,5.54,2.67,6.53,.74,4.94,4.89,.69,1.42)
+gasolinas<-data.frame(motor,edad,linea,refo)
+bas<-data.frame(edad,linea)
+ggplot(data=bas, aes(x=edad,y=linea))+geom_point()+geom_smooth(method=("lm"))
+re<-data.frame(edad,refo)
+ggplot(data=re, aes(x=edad,y=refo),color='red')+geom_point()+geom_smooth(method=("lm"))
+cor(edad,linea)
+cor(edad,refo)
+#Tiene una relación negativa, por lo cual conforme más años tiene el motor, menor
+#hay menor emición de NO, lo cual no tiene sentido.
+
+#------------------------------------------------------------------------------------------------------------------------------
+#3)
+croma<-c(47,62,65,70,70,78,95,100,114,118,124,127,140,140,140,150,152,164,198,221)
+sensor<-c(38,62,53,67,84,79,93,106,117,116,127,114,134,139,142,170,149,154,200,215)
+hidro<-data.frame(croma,sensor)
+ggplot(data=hidro, aes(x=croma,y=sensor))+geom_point()+geom_smooth(method=("lm"))
+cor(croma,sensor)
+sxy<-cov(croma,sensor)
+sxx<-var(croma)
+show(sxy/sxx)
+#Sí existe una muy fuerte relación en las mediciones de hidrogeno con el 
+#ambos métodos.
+#Ya que la pendiente de la recta estimada es 1.001, indica que es una relación
+#1 a 1, por lo que sus mediciones son iguales
+#----------------------------------------------------------------------------------------------------
+#4)
+x<-c(5.8,8.8,11,13.6,18.5,21,23.7,26,28.3,31.9,36.5,38.2,40.4)
+y<-c(7.8,8.2,6.9,5.3,4.7,4.9,4.3,2.7,2.8,1.8,1.9,1.1,.4)
