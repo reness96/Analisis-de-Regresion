@@ -2,29 +2,31 @@ install.packages("ggplot2")
 library(ggplot2)
 set.seed(1410) # Make the sample reproducible
 dsmall <- diamonds[sample(nrow(diamonds), 100), ]
-
+diamonds
 qplot(carat, price, data = diamonds)
 qplot(log(carat), log(price), data = diamonds)
 qplot(carat, x * y * z, data = diamonds)
 
-qplot(carat, price, data = dsmall, colour = color)
-qplot(carat, price, data = dsmall, shape = cut)
+dsmall
+qplot(carat, price, data = dsmall, colour = color) #Coloridos
+qplot(carat, price, data = dsmall, shape = cut) #Figuras clasificar por categorías
 
-qplot(carat, price, data = diamonds, alpha = I(1/10))
-qplot(carat, price, data = diamonds, alpha = I(1/100))
-qplot(carat, price, data = diamonds, alpha = I(1/200))
+qplot(carat, price, data = diamonds, alpha = I(1/10)) #Desvanecer
+qplot(carat, price, data = diamonds, alpha = I(1/100)) 
+qplot(carat, price, data = diamonds, alpha = I(1/200)) #Desvanecer cada vez mas
 
-qplot(carat, price, data = dsmall, geom = c("point", "smooth"))
+qplot(carat, price, data = dsmall, geom = c("point", "smooth")) 
 qplot(carat, price, data = diamonds, geom = c("point", "smooth"))
+#Dispersión y líneas de regresión
 
 qplot(carat, price, data = dsmall, geom = c("point", "smooth"),
       span = 0.2)
 qplot(carat, price, data = dsmall, geom = c("point", "smooth"),
       span = 1)
+#Span= duración, período. Entre 0 y 1.
 
 library(mgcv)
 qplot(carat, price, data = dsmall, geom = c("point", "smooth"),
-      16 2 Getting started with qplot
       method = "gam", formula = y ~ s(x))
 qplot(carat, price, data = dsmall, geom = c("point", "smooth"),
       method = "gam", formula = y ~ s(x, bs = "cs"))
@@ -34,6 +36,7 @@ qplot(carat, price, data = dsmall, geom = c("point", "smooth"),
       method = "lm")
 qplot(carat, price, data = dsmall, geom = c("point", "smooth"),
       method = "lm", formula = y ~ ns(x,5))
+#Linear model
 
 qplot(color, price / carat, data = diamonds, geom = "jitter",
       alpha = I(1 / 5))
@@ -41,9 +44,10 @@ qplot(color, price / carat, data = diamonds, geom = "jitter",
       alpha = I(1 / 50))
 qplot(color, price / carat, data = diamonds, geom = "jitter",
       alpha = I(1 / 200))
+#Agrega un poco de ruido aleatorio para visualizar los datos por niveles más fácilmente
 
-qplot(carat, data = diamonds, geom = "histogram")
-qplot(carat, data = diamonds, geom = "density")
+qplot(carat, data = diamonds, geom = "histogram") #Histograma
+qplot(carat, data = diamonds, geom = "density") #Línea de densidad
 
 qplot(carat, data = diamonds, geom = "histogram", binwidth = 1,
       xlim = c(0,3))
@@ -51,20 +55,22 @@ qplot(carat, data = diamonds, geom = "histogram", binwidth = 0.1,
       xlim = c(0,3))
 qplot(carat, data = diamonds, geom = "histogram", binwidth = 0.01,
       xlim = c(0,3))
+#Binwidth=Ancho de barra, xlim= límite de barras.
 
 qplot(carat, data = diamonds, geom = "density", colour = color)
 qplot(carat, data = diamonds, geom = "histogram", fill = color)
 
 qplot(color, data = diamonds, geom = "bar")
 qplot(color, data = diamonds, geom = "bar", weight = carat) +
-  scale_y_continuous("carat")
+  scale_y_continuous("carat") #Acomodarlas de forma central y proporcional
 
 qplot(date, unemploy / pop, data = economics, geom = "line")
-qplot(date, uempmed, data = economics, geom = "line")
+qplot(date, uempmed, data = economics, geom = "line") 
+#Gráficos de lineas
 
 year <- function(x) as.POSIXlt(x)$year + 1900
 qplot(unemploy / pop, uempmed, data = economics,
-      geom = c("point", "path"))
+      geom = c("point", "path")) #Unir los puntos
 qplot(unemploy / pop, uempmed, data = economics,
       geom = "path", colour = year(date)) + scale_area()
 
