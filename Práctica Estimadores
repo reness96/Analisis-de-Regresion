@@ -1,0 +1,43 @@
+x<-c(50,50,80,80,110,110,140,140,170,170)
+y<-c(17052,14063,26264,19600,21952,26362,26362,26754,31654,32928)
+Dat<-data.frame(x,y)
+require(ggplot2)
+ggplot(data=Dat, aes(x=x,y=y))+geom_point()
+#B1 y B0
+xm<-mean(x)
+ym<-mean(y)
+sxy<-cov(x,y)
+sxx<-var(x)
+B1<-(sxy)/(sxx)
+B1
+sumy<- sum(y)
+sumx<-sum(y)
+B0<-ym-(B1*xm)
+B0
+#.........................................................................................
+#Calculando los residuos:
+yest<-B0+(B1*x)
+residuos<-c(y-yest)
+# Cálculo del SSE
+SSE<-sum((y-yest)^2)
+n<-length(x)
+s2<-SSE/(n-2)
+s<-sqrt(s2)
+#Cálculo de SST
+SST<-sum((y-ym)^2)
+SST
+r2<-1-(SSE/SST)
+r2
+sb2<-(s2/sxx)
+sb <- sqrt(sb2)
+SB <-19.83639
+t<- 2.3060
+B1+(SB*t)
+B1-(SB*t)
+s2
+sxx
+#----------------------------------------------------------------------------------------------
+#y=10698.33+123.6433x
+#SSE=56661439
+#r2=0.8292505
+#sb=59.50916
